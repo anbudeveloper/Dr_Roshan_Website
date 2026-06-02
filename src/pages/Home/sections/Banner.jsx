@@ -87,7 +87,7 @@ function Banner({ onBookAppointment }) {
                 </div>
 
                 <div className="hero-actions">
-                  <button className="primary-btn" type="button" onClick={onBookAppointment}>
+                  <button className="primary-btn" type="button" onClick={() => onBookAppointment()}>
                     Book Appointment <Icon name="calendar" size={17} />
                   </button>
                   <a className="secondary-btn" href="https://wa.me/919443164101">
@@ -121,7 +121,7 @@ function Banner({ onBookAppointment }) {
                     ))}
                   </div>
                   <div className="hero-actions">
-                    <button className="primary-btn" type="button" onClick={onBookAppointment}>
+                    <button className="primary-btn" type="button" onClick={() => onBookAppointment()}>
                       Book Appointment <Icon name="calendar" size={17} />
                     </button>
                     <a className="secondary-btn" href="https://wa.me/919443164101">

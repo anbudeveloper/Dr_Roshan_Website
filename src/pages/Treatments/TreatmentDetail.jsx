@@ -52,7 +52,7 @@ import clinic20 from '../../assets/Images/Dr_Roshan/WhatsApp Image 2026-05-30 at
 const treatmentData = {
   'dental-implants': {
     primaryImage:   implantImg,
-    secondaryImage: root2Img,
+    secondaryImage: implant2Img,
     gallery: [implantImg, clinic01, clinic02, clinic03, clinic04],
   },
   'root-canal': {
@@ -62,22 +62,22 @@ const treatmentData = {
   },
   'invisible-aligners': {
     primaryImage:   alignerImg,
-    secondaryImage: root2Img,
+    secondaryImage: aligner2Img,
     gallery: [alignerImg, clinic09, clinic10, clinic11, clinic12],
   },
   'smile-designing': {
     primaryImage:   smileImg,
-    secondaryImage: root2Img,
+    secondaryImage: smile2Img,
     gallery: [smileImg, clinic13, clinic14, clinic15, clinic16],
   },
   'kids-dentistry': {
     primaryImage:   kidsImg,
-    secondaryImage: root2Img,
+    secondaryImage: kids2Img,
     gallery: [kidsImg, clinic17, clinic18, clinic19, clinic20],
   },
   'zirconia-ceramic-teeth': {
     primaryImage:   ceramicImg,
-    secondaryImage: root2Img,
+    secondaryImage: ceramic2Img,
     gallery: [ceramicImg, clinic01, clinic05, clinic09, clinic13],
   },
 }

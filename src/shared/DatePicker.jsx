@@ -37,7 +37,7 @@ export default function DatePicker({ value, onChange, variant = 'light' }) {
     if (!triggerRef.current) return
     const r = triggerRef.current.getBoundingClientRect()
     setRect({ top: r.bottom + 6, left: r.left, width: Math.max(r.width, 280) })
-  }, [])
+  }, [setRect])
 
   const handleOpen = () => {
     if (!open && value) {

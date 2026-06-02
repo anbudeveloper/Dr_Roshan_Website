@@ -1,10 +1,19 @@
 export async function submitForm(data) {
-  const res = await fetch('/api/contact', {
+  const res = await fetch('http://localhost:5000/api/send-email', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      type:      data.email || data.message ? 'contact' : 'appointment',
+      name:      data.name,
+      phone:     data.phone,
+      email:     data.email     || '',
+      treatment: data.treatment || 'Not specified',
+      date:      data.date      || 'Not specified',
+      message:   data.message   || '',
+    }),
   })
-  const json = await res.json()
-  if (!res.ok || !json.success) throw new Error(json.error || 'Submission failed')
-  return json
+
+  const result = await res.json()
+  if (!res.ok) throw new Error(result.error || 'Email send failed')
+  return result
 }

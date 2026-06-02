@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { NavLink, Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { NavLink, Link } from 'react-router-dom'
 import logo from '../assets/Images/Header/Dental_logo.png'
 import Icon from '../shared/Icons'
 
@@ -26,10 +26,6 @@ const navItems = [
 function Header({ onBookAppointment }) {
   const [menuOpen, setMenuOpen]     = useState(false)
   const [expanded, setExpanded]     = useState(null)
-  const { pathname } = useLocation()
-
-  useEffect(() => { setMenuOpen(false); setExpanded(null) }, [pathname])
-
   const closeMenu = () => { setMenuOpen(false); setExpanded(null) }
 
   return (
@@ -88,7 +84,7 @@ function Header({ onBookAppointment }) {
               <Icon name="phone" size={14} />
               +91 94431 64101
             </a>
-            <button className="nav-grad-btn nav-book-mobile-hide" type="button" onClick={onBookAppointment}>
+            <button className="nav-grad-btn nav-book-mobile-hide" type="button" onClick={() => onBookAppointment()}>
               <Icon name="calendar" size={14} />
               Book Appointment
             </button>

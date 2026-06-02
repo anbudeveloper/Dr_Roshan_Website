@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Icon from '../../../shared/Icons'
 import SelectDropdown from '../../../shared/SelectDropdown'
 import DatePicker from '../../../shared/DatePicker'
+import { submitForm } from '../../../utils/submitForm'
 
 const TREATMENT_OPTIONS = [
   'Dental Implants',
@@ -19,13 +20,20 @@ export default function BookingCTA({ treatment }) {
     treatment: treatment.name,
     date: '',
   })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState('idle')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
-    setForm({ name: '', phone: '', treatment: treatment.name, date: '' })
+    setStatus('sending')
+    try {
+      await submitForm(form)
+      setStatus('success')
+      setForm({ name: '', phone: '', treatment: treatment.name, date: '' })
+      setTimeout(() => setStatus('idle'), 4000)
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 4000)
+    }
   }
 
   return (
@@ -72,7 +80,7 @@ export default function BookingCTA({ treatment }) {
           >
             <h3 className="text-[#07133f] font-black text-xl mb-6">Book an Appointment</h3>
 
-            {submitted ? (
+            {status === 'success' ? (
               <div className="flex flex-col items-center gap-3 py-8 text-center">
                 <div className="h-14 w-14 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -111,11 +119,15 @@ export default function BookingCTA({ treatment }) {
                   onChange={(val) => setForm({ ...form, date: val })}
                   variant="light"
                 />
+                {status === 'error' && (
+                  <p className="text-sm text-red-500">Something went wrong. Please try again.</p>
+                )}
                 <button
                   type="submit"
                   className="primary-btn w-full justify-center"
+                  disabled={status === 'sending'}
                 >
-                  Confirm Appointment <Icon name="arrow" size={16} />
+                  {status === 'sending' ? 'Sending…' : <> Confirm Appointment <Icon name="arrow" size={16} /> </>}
                 </button>
               </div>
             )}
